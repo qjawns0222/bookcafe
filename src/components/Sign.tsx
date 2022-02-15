@@ -1,6 +1,19 @@
 import { Row, Col, Button, Input } from "antd";
+import { useRef } from "react";
+import { Loginreqtype } from "../types";
 
-export default function Sign() {
+interface Signinprops {
+  login: (reqdate: Loginreqtype) => void;
+}
+const Sign: React.FC<Signinprops> = ({ login }) => {
+  const emailRef = useRef<Input>(null);
+  const passwordRef = useRef<Input>(null);
+  function click() {
+    const email = emailRef.current!.state.value;
+    const password = passwordRef.current!.state.value;
+    console.log(email, password);
+    login({ email, password });
+  }
   return (
     <Row align="middle">
       <Col span={24}>
@@ -17,7 +30,12 @@ export default function Sign() {
               <span>*</span>
             </div>
             <div>
-              <Input placeholder="Email" autoComplete="email" name="email" />
+              <Input
+                ref={emailRef}
+                placeholder="Email"
+                autoComplete="email"
+                name="email"
+              />
             </div>
             <div>
               Password
@@ -25,17 +43,21 @@ export default function Sign() {
             </div>
             <div>
               <Input
+                ref={passwordRef}
                 type="password"
                 autoComplete="current-password"
                 name="email"
               />
             </div>
             <div>
-              <Button size="large">로그인</Button>
+              <Button onClick={click} size="large">
+                로그인
+              </Button>
             </div>
           </Col>
         </Row>
       </Col>
     </Row>
   );
-}
+};
+export default Sign;
