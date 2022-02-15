@@ -1,11 +1,13 @@
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Input } from "antd";
 
 export default function Sign() {
   return (
     <Row align="middle">
       <Col span={24}>
         <Row>
-          <Col span={12}></Col>
+          <Col span={12}>
+            <img src="/bg_signin.png" alt="#" />
+          </Col>
           <Col span={12}>
             <div>나의책</div>
             <div>Please Note Your Opinion</div>
@@ -15,17 +17,17 @@ export default function Sign() {
               <span>*</span>
             </div>
             <div>
-              <input placeholder="Email" autoComplete="email" name="Email" />
+              <Input placeholder="Email" autoComplete="email" name="email" />
             </div>
             <div>
-              password
+              Password
               <span>*</span>
             </div>
             <div>
-              <input
+              <Input
                 type="password"
                 autoComplete="current-password"
-                name="Email"
+                name="email"
               />
             </div>
             <div>
