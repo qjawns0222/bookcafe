@@ -51,7 +51,7 @@ function* loginSaga(action: Action<Loginreqtype>) {
     TokenService.set(token);
     yield put(success(token));
   } catch (error) {
-    yield put(fail(error));
+    yield put(fail(new Error(error?.response?.data?.error || "UNKNOWN_ERROR")));
   }
 }
 function* logoutSaga() {}
