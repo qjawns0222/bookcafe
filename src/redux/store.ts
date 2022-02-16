@@ -3,9 +3,18 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import reduce from "./modules/reduce";
 import createSagaMiddleware from "redux-saga";
 import RootSaga from "./modules/RootSaga";
-const Saga = createSagaMiddleware();
+import { routerMiddleware } from "connected-react-router";
+import history from "../history";
+import TokenService from "../service/TokenService";
+
 const create = () => {
-  const store = createStore(reduce, composeWithDevTools(applyMiddleware(Saga)));
+  const token = TokenService.get();
+  const Saga = createSagaMiddleware();
+  const store = createStore(
+    reduce(history),
+    { auth: { token, loading: false, error: null } },
+    composeWithDevTools(applyMiddleware(Saga, routerMiddleware(history)))
+  );
   Saga.run(RootSaga);
   return store;
 };

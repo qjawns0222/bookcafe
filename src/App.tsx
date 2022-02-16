@@ -8,11 +8,13 @@ import NotFound from "./pages/NotFound";
 import Edit from "./pages/Edit";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./pages/Error";
+import { ConnectedRouter } from "connected-react-router";
+import history from "./history";
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={Error}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/Sign" component={Sign} />
@@ -21,7 +23,7 @@ function App() {
           <Route exact path="/Edit:id" component={Edit} />
           <Route exact component={NotFound} />
         </Switch>
-      </BrowserRouter>
+      </ConnectedRouter>
     </ErrorBoundary>
   );
 }

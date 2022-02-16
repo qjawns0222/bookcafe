@@ -1,5 +1,6 @@
 import { Row, Col, Button, Input } from "antd";
 import { useRef } from "react";
+
 import { Loginreqtype } from "../types";
 
 interface Signinprops {
@@ -8,10 +9,11 @@ interface Signinprops {
 const Sign: React.FC<Signinprops> = ({ login }) => {
   const emailRef = useRef<Input>(null);
   const passwordRef = useRef<Input>(null);
+
   function click() {
     const email = emailRef.current!.state.value;
     const password = passwordRef.current!.state.value;
-    console.log(email, password);
+
     login({ email, password });
   }
   return (
