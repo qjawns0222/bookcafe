@@ -12,9 +12,21 @@ export interface AuthState {
   loading: boolean;
   error: Error | null;
 }
-export interface BookType {}
+export interface BookType {
+  bookId: number;
+  title: string;
+  author: string;
+  createdAt: string;
+  url: string;
+}
 export interface BookState {
   books: BookType[] | null;
   loading: boolean;
   error: Error | null;
+}
+export interface BookReqType {
+  title: string;
+  comment: string;
+  auth: string;
+  url: string;
 }

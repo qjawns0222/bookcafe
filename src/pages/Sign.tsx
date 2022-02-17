@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import { Redirect } from "react-router-dom";
 import SignContainer from "../containers/Signcontainer";
-import { RootState } from "../types";
+import UseToken from "../hooks/UseToken";
+
 export default function Sign() {
-  const token = useSelector<RootState, string | null>(
-    (state) => state.auth.token
-  );
+  const token = UseToken();
   if (token !== null) {
     return <Redirect to="/" />;
   }

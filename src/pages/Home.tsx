@@ -1,13 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import { Redirect } from "react-router-dom";
-import { RootState } from "../types";
 
 import BookContainer from "../containers/BookContainer";
+import UseToken from "../hooks/UseToken";
 export default function Home() {
-  const token = useSelector<RootState, string | null>(
-    (state) => state.auth.token
-  );
+  const token = UseToken();
   if (token === null) {
     return <Redirect to="/sign" />;
   }

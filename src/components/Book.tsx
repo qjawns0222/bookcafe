@@ -3,17 +3,32 @@ import { useEffect } from "react";
 import { BookType } from "../types";
 
 import Layout from "./Layout";
+import List from "./List";
 interface BookProps {
   books: BookType[] | null;
   loading: boolean;
+  error: Error | null;
   getBooks: () => void;
+  logout: () => void;
+  goAdd: () => void;
 }
-const Book: React.FC<BookProps> = ({ books, loading, getBooks }) => {
+const Book: React.FC<BookProps> = ({
+  books,
+  loading,
+  getBooks,
+  error,
+  logout,
+  goAdd,
+}) => {
   useEffect(() => {
     getBooks();
   }, [getBooks]);
-  const goadd = () => {};
-  const logout = () => {};
+  useEffect(() => {
+    if (error) {
+      logout();
+    }
+  }, [error, logout]);
+
   return (
     <Layout>
       <div>
@@ -23,7 +38,7 @@ const Book: React.FC<BookProps> = ({ books, loading, getBooks }) => {
             <Button key="1" onClick={logout}>
               로그아웃
             </Button>,
-            <Button key="2" onClick={goadd}>
+            <Button key="2" onClick={goAdd}>
               추가
             </Button>,
           ]}
@@ -35,7 +50,7 @@ const Book: React.FC<BookProps> = ({ books, loading, getBooks }) => {
               title: "Book",
               dataIndex: "book",
               key: "book",
-              render: () => <div>book</div>,
+              render: (text, record) => <List {...record} />,
             },
           ]}
           loading={books === null || loading}
