@@ -9,7 +9,7 @@ export default class BookService {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res);
+
     return res.data;
   }
   public static async addBook(
@@ -21,7 +21,14 @@ export default class BookService {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res);
+
     return res.data;
+  }
+  public static async deleteBook(token: string, bookId: number) {
+    await axios.delete(`${API}/${bookId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }

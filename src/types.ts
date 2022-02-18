@@ -30,3 +30,10 @@ export interface BookReqType {
   auth: string;
   url: string;
 }
+export interface BookEditType {
+  bookid: number;
+  title: string;
+  comment: string;
+  auth: string;
+  url: string;
+}

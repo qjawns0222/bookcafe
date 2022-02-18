@@ -3,19 +3,24 @@ import { Button, Input, message, PageHeader } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import TextAreaType from "rc-textarea";
 import { useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { BookReqType } from "../types";
 import Layout from "./Layout";
 interface AddProps {
   logout: () => void;
   back: () => void;
   loading: boolean;
-  add: (book: BookReqType) => void;
+  Edit: (book: BookReqType) => void;
 }
-const Add: React.FC<AddProps> = ({ logout, back, loading, add }) => {
+const Detail: React.FC<AddProps> = ({ logout, back, loading, Edit }) => {
   const titleRef = useRef<Input>(null);
   const commentRef = useRef<TextAreaType>(null);
   const authRef = useRef<Input>(null);
   const urlRef = useRef<Input>(null);
+  const location = useLocation();
+  const bookId = location.state.bookId;
+  console.log(bookId);
+
   return (
     <Layout>
       <PageHeader
@@ -63,7 +68,7 @@ const Add: React.FC<AddProps> = ({ logout, back, loading, add }) => {
         </div>
         <div>
           <Button size="large" loading={loading} onClick={click}>
-            Add
+            수정
           </Button>
         </div>
       </div>
@@ -75,13 +80,12 @@ const Add: React.FC<AddProps> = ({ logout, back, loading, add }) => {
     const auth = authRef.current!.state.value;
     const url = urlRef.current!.state.value;
 
-    if (title == null || comment === "" || url == null || auth == null) {
-      message.error("빈칸없이 다채워주세요");
+    if (title == null && comment === "" && url == null && auth == null) {
+      message.error("한개라도 채워주세요");
       return;
     }
-
-    add({ title, comment, auth, url });
+    Edit({ title, comment, auth, url });
   }
 };
 
-export default Add;
+export default Detail;
